@@ -1,6 +1,9 @@
 from tool.operation_excle import OperationExcle
 from tool.operation_json import OperationJson
 from operation_data import data_config
+from tool.data_type_change import TypeChange
+import json
+from testCase.test1 import test1
 
 class GetData:
     def __init__(self):
@@ -24,18 +27,27 @@ class GetData:
     def is_header(self,row):
         col=int(data_config.get_header())
         header=self.opera_excle.get_cell_value(row,col)
-        if header=='yes':
-            return data_config.get_header_value()
+        if header=='NoToken':
+            return data_config.get_header_no_token()
+        elif header=='appToken':
+            return data_config.get_header_value_token()
         else:
             return None
+
+    #改变header数据类型，xlsxwriter模块写入数据是需要将数据类型为str
+    def get_str_header(self,row):
+        col=int(data_config.get_header())
+        header=self.opera_excle.get_cell_value(row,col)
+        return str(header)
     #获取请求url名称
     def get_request_name(self,row):
         col=int(data_config.get_request_name())
         request_name=self.opera_excle.get_cell_value(row,col)
         if request_name!='':
-            print('请求url'+request_name)
+            print('请求url:'+request_name)
         else:
             return None
+        return request_name
     #获取请求方式
     def get_request_method(self,row):
         col = int(data_config.get_request_method())
@@ -50,14 +62,23 @@ class GetData:
     def get_request_data(self,row):
         col = int(data_config.get_data())
         data = self.opera_excle.get_cell_value(row, col)
-        if data == "":
-            return None
+        # if data == "":
+        #     return None
         return data
-    #通过获取关键字拿到data数据
-    def get_data_for_json(self,row):
-        opear_json=OperationJson()
-        request_data=opear_json.get_data(self.get_request_data(row))
-        return request_data
+    #更改请求数据类型
+    def request_data_type_change(self,row):
+        ty_ch=TypeChange()
+        ch_data=ty_ch.data_change(self.get_request_data(row))
+        interface_fabuhui_address="http://127.0.0.1:8000"
+        if interface_fabuhui_address in self.get_url(row):
+            return ch_data
+        else:
+            return json.dumps(ch_data)
+    # #通过获取关键字拿到data数据
+    # def get_data_for_json(self,row):
+    #     opear_json=OperationJson()
+    #     request_data=opear_json.get_data(self.get_request_data(row))
+    #     return request_data
     #获取预期结果
     def get_expect_data(self,row):
         col=int(data_config.get_expect())
@@ -69,10 +90,14 @@ class GetData:
     #写入实际结果
     def write_result(self, row, value):
         col=int(data_config.get_result())
-        self.opera_excle.write_value(row,col,value)
-        # self.opera_excle.write_value(row, col, value)
-        # return result
+        # result=self.opera_excle.write_value(row,col,value)
+        self.opera_excle.write_value(row, col, value)
 
+    #获取实际结果
+    def get_result(self, row):
+        col=int(data_config.get_result())
+        result=self.opera_excle.get_cell_value(row,col)
+        return result
     #获取依赖数据的key
     def get_depent_key(self,row):
         col=int(data_config.get_data_depend())

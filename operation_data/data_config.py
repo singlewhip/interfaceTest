@@ -1,3 +1,5 @@
+from tool.operation_header import OperationHeader
+
 class global_val:
     #case_id
     Id='0'
@@ -32,8 +34,14 @@ def get_header():
     return global_val.header
 
 #获取header值
-def get_header_value():
-    header={"Content-Type": "application/json"}
+def get_header_value_token():
+    get_token=OperationHeader()
+    tokenValue=get_token.get_header()
+    return tokenValue
+
+def get_header_no_token():
+    header = {"Content-Type": "application/json"}
+    return header
 
 def get_case_dapend():
     return global_val.case_dapend

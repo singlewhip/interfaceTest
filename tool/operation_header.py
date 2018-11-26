@@ -13,6 +13,7 @@ class OperationHeader:
         headerNotlogin = {"Content-Type": "application/json"}
         res=requests.post(url=url,data=json.dumps(data),headers=headerNotlogin)
         response=res.json()
+        print(response)
         token=response['data']['token']
         # print(token)
         headerLogin={"Content-Type": "application/json","token":token}

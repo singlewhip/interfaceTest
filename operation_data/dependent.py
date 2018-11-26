@@ -23,7 +23,8 @@ class DependentData:
     def run_dependent(self):
         run_method=RunMethod()
         row_num=self.opera_excle.get_row_num(self.case_id)
-        request_data=self.data.get_data_for_json(row_num)
+        # request_data=self.data.get_data_for_json(row_num)
+        request_data = self.data.get_request_data(row_num)
         header=self.data.get_is_header(row_num)
         method=self.data.get_request_method(row_num)
         url=self.data.get_url(row_num)
