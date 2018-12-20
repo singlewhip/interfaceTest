@@ -8,8 +8,8 @@ import time
 class Write_testReport_excle():
     global workbook,worksheet,chart,formatter,title_formatter,ave_formatter,now,filename
     now = time.strftime("%Y-%m-%d %H-%M-%S")
-    workbook=xlsxwriter.Workbook("../dataconfig/" + now + '_test_report.xlsx')
-    filename='../dataconfig/' + now + '_test_report.xlsx'
+    workbook=xlsxwriter.Workbook("../report/excle_report/" + now + '_test_report.xlsx')
+    filename='../report/excle_report/' + now + '_test_report.xlsx'
     worksheet = workbook.add_worksheet("测试报告")
     # 创建一个图表对象,column:柱形图
     chart = workbook.add_chart({'type': 'column'})
@@ -58,7 +58,7 @@ class Write_testReport_excle():
         # 注意这里不能直接使用workbook,因为直接引用workbook返回的对象不是一个文件路径，而是:<class 'xlsxwriter.workbook.Workbook'>
         fp=pandas.ExcelFile(filename)
         df=fp.parse()
-        with codecs.open('../report/'+now+'_test_report.html', 'w', 'utf-8') as html_file:
+        with codecs.open('../report/html_report/'+now+'_test_report.html', 'w', 'utf-8') as html_file:
             html_file.write(df.to_html(header=True, index=False))
 
 if __name__=="__main__":

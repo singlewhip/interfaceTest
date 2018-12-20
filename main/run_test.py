@@ -15,7 +15,13 @@ import os
 
 class RunTest:
     def __init__(self):
-        self.ope=OperationExcle()
+        path = '../dataCase'
+        for test_list in os.listdir(path):
+            # print(test_list)
+            file_address = path + '/' + test_list
+            sheet_id = 0
+            self.ope=OperationExcle(file_address,sheet_id)
+        # self.ope=OperationExcle()
         self.run_method=RunMethod()
         self.data=GetData()
         self.com_util=CommonUtil()
@@ -27,10 +33,6 @@ class RunTest:
         res=None
         pass_count=[]
         fail_count=[]
-        # path='../dataCase'
-        # for test_list in os.listdir(path):
-        #     print(test_list)
-        #     # self.ope.__init__(file_address=test_list,sheet_id=1)
         rows_count=self.data.get_case_line()
         for i in range(1,rows_count):
             is_run=self.data.get_is_run(i)
@@ -41,11 +43,11 @@ class RunTest:
                 request_data=self.data.request_data_type_change(i)
                 # print(request_data)
                 expect=self.data.get_expect_data(i)
-                print(type(expect))
+                # print(type(expect))
                 header=self.data.is_header(i)
                 # print(header)
                 depent_case=self.data.is_depend(i)
-                print(str(url)+str(method)+str(request_data)+str(expect)+str(header))
+                # print(str(url)+str(method)+str(request_data)+str(expect)+str(header))
                 # if depent_case!=None:
                 #     self.depent_data=DependentData(depent_case)
                 #     #获取依赖响应数据

@@ -15,9 +15,6 @@ class OperationExcle:
             self.sheet_id = sheet_id
             file_address = path + '/' + test_list
             sheet_id=0
-            # for sheets_list in range(len(tables)):
-            #     sheet_id = sheets_list
-            #     print(sheets_list)
         self.data = self.get_data()
     # 获取sheets的内容
     def get_data(self):
