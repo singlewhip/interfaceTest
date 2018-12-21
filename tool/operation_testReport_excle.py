@@ -10,8 +10,8 @@ import time
 class Write_testReport_excle():
     global workbook,worksheet,chart,formatter,title_formatter,ave_formatter,now,filename
     now = time.strftime("%Y-%m-%d %H-%M-%S")
-    workbook=xlsxwriter.Workbook("../report/excle_report/" + now + '_test_report.xlsx')
-    filename='../report/excle_report/' + now + '_test_report.xlsx'
+    workbook=xlsxwriter.Workbook("../report/excle_report/" + now + '_test_report.xls')
+    filename='../report/excle_report/' + now + '_test_report.xls'
     worksheet = workbook.add_worksheet("测试报告")
     # 创建一个图表对象,column:柱形图
     chart = workbook.add_chart({'type': 'column'})
@@ -58,7 +58,7 @@ class Write_testReport_excle():
         list1=('B','C','D')
         for row_num in list1:
             chart.add_series({
-            "name":"=测试报告!$B$1",
+            "name":"=测试报告!${}$1:${}$1".format(row_num,row_num),
             "categories":"=测试报告!$A$2:$A$6",
             "values":"=测试报告!${}$2:${}$6".format(row_num,row_num)
             })
@@ -73,7 +73,7 @@ class Write_testReport_excle():
         #设置图表大小
         chart.set_size({'width': 600, 'height': 400})
         # 插入图表带偏移
-        worksheet.insert_chart('G2', chart, {'x_offset': 25, 'y_offset': 10})
+        worksheet.insert_chart('A12', chart, {'x_offset': 25, 'y_offset': 10})
         # 定义标题栏格式对象：边框加粗1像素，背景色为灰色，单元格内容居中、加粗,自动换行
         formatter = workbook.add_format()
         formatter.set_border(1)
