@@ -4,10 +4,16 @@ from operation_data import data_config
 from tool.data_type_change import TypeChange
 import json
 from testCase.test1 import test1
+import os
 
 class GetData:
     def __init__(self):
-        self.opera_excle=OperationExcle()
+        path = '../dataCase'
+        for test_list in os.listdir(path):
+            # print(test_list)
+            file_address = path + '/' + test_list
+            sheet_id = 0
+            self.opera_excle=OperationExcle(file_address,sheet_id)
     #获取excle行数，就是用例数
     def get_case_line(self):
        return self.opera_excle.get_lines()
@@ -124,3 +130,7 @@ class GetData:
             return data
 
 
+if __name__=="__main__":
+    gd=GetData()
+    print(gd.get_case_line())
+    print(gd.get_url(int(data_config.get_url())))

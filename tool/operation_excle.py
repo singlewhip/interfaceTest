@@ -6,16 +6,18 @@ import xlrd
 from xlutils.copy import copy  # 导入xlutils模块实现对exlcle的修改
 import os
 
+
 class OperationExcle:
     def __init__(self, file_address=None, sheet_id=None):
-        path='../dataCase'
+        path = '../dataCase'
         for test_list in os.listdir(path):
             # print(test_list)
             self.file_address = file_address
             self.sheet_id = sheet_id
             file_address = path + '/' + test_list
-            sheet_id=0
+            sheet_id = 0
         self.data = self.get_data()
+
     # 获取sheets的内容
     def get_data(self):
         data = xlrd.open_workbook(self.file_address)
@@ -23,18 +25,18 @@ class OperationExcle:
         return tables
 
     # 获取单元格的行数
-    def get_lines(self) :
+    def get_lines(self):
         tables = self.data
         return tables.nrows
 
     # 获取某一个单元格的内容
-    def get_cell_value(self, row, col) :
-        return self.data.cell_value(row,col)
+    def get_cell_value(self, row, col):
+        return self.data.cell_value(row, col)
         # print(row,col)
         # 根据行列返回表单内容
 
     # 写入数据
-    def write_value(self, row, col, value) :
+    def write_value(self, row, col, value):
         '''写入excle数据row，col，value'''
         read_data = xlrd.open_workbook(self.file_address)
         write_data = copy(read_data)
@@ -47,8 +49,8 @@ class OperationExcle:
         row_num = self.get_row_num(case_id)
         rows_data = self.get_row_values(row_num)
         return rows_data
-        
-     # 根据对应的caseid找到相应的行号
+
+    # 根据对应的caseid找到相应的行号
     def get_row_num(self, case_id):
         num = 0
         cols_data = self.get_cols_data()
@@ -63,7 +65,7 @@ class OperationExcle:
         row_data = tables.row_values(row)
         return row_data
 
-     # 获取某一列的内容
+    # 获取某一列的内容
     def get_cols_data(self, col_id: object = None) -> object:
         if col_id != None:
             cols = self.data.col_value(col_id)
