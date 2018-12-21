@@ -6,6 +6,7 @@ import time
 import pandas
 import codecs
 import time
+import os
 
 class Write_testReport_excle():
     global workbook,worksheet,chart,formatter,title_formatter,ave_formatter,now,filename
@@ -21,10 +22,12 @@ class Write_testReport_excle():
     # ave_formatter.set_border(1)
     # ave_formatter.set_num_format('0.00')
     def __init__(self):
-        self.Ope=OperationExcle()
+        path = '../dataCase'
+        for test_list in os.listdir(path):
+            file_address = path + '/' + test_list
+            sheet_id = 0
+            self.Ope=OperationExcle(file_address,sheet_id)
         self.data=GetData()
-        # self.workbook=workbook
-        # self.worksheet=worksheet
     def create_TestReport(self):
         worksheet.set_column("A:ZZ",20)
         # bold = workbook.add_format({"bold": True})
