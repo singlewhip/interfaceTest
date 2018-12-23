@@ -8,6 +8,7 @@ from tool.send_email import SendEmail
 from tool.operation_header import OperationHeader
 from tool.operation_json import OperationJson
 from tool.operation_excle import OperationExcle
+from base import HTMLTestRunner
 import time
 from tool.operation_testReport_excle import Write_testReport_excle
 import os
@@ -16,13 +17,13 @@ class RunTest:
     def __init__(self):
         path = '../dataCase'
         for test_list in os.listdir(path):
-            print(test_list)
+            # print(test_list)
             file_address = path + '/' + test_list
             sheet_id = 0
             self.ope=OperationExcle(file_address,sheet_id)
-        self.data = GetData()
         # self.ope=OperationExcle()
         self.run_method=RunMethod()
+        self.data=GetData()
         self.com_util=CommonUtil()
         self.send_mail=SendEmail()
         self.op_testReport=Write_testReport_excle()
@@ -46,7 +47,7 @@ class RunTest:
                 header=self.data.is_header(i)
                 # print(header)
                 depent_case=self.data.is_depend(i)
-                print(str(url)+str(method)+str(request_data)+str(expect)+str(header))
+                # print(str(url)+str(method)+str(request_data)+str(expect)+str(header))
                 # if depent_case!=None:
                 #     self.depent_data=DependentData(depent_case)
                 #     #获取依赖响应数据
@@ -65,7 +66,6 @@ class RunTest:
                 #     res=self.run_method.run_main(method,url,request_data)
                 # else:
                 res=self.run_method.run_main(method,url,request_data,header)
-                # print(res)
                 if self.com_util.is_contain(expect,res)==True:
                     self.data.write_result(i,'pass')
                     print("测试通过")
