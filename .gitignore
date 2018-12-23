@@ -4,3 +4,4 @@ __pycache__/
 ./operation_data/__pycache__/
 ./main/__pycache__/
 ./base/__pycache__/
+./report/

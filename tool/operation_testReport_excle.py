@@ -1,8 +1,6 @@
 from tool.operation_excle import OperationExcle
 from operation_data.get_data import GetData
-from operation_data import data_config
 import xlsxwriter
-import time
 import pandas
 import codecs
 import time
@@ -10,8 +8,8 @@ import time
 class Write_testReport_excle():
     global workbook,worksheet,chart,formatter,title_formatter,ave_formatter,now,filename
     now = time.strftime("%Y-%m-%d %H-%M-%S")
-    workbook=xlsxwriter.Workbook("../report/excle_report/" + now + '_test_report.xlsx')
-    filename='../report/excle_report/' + now + '_test_report.xlsx'
+    workbook=xlsxwriter.Workbook("../report/excle_report/" + now + '_test_report.xls')
+    filename='../report/excle_report/' + now + '_test_report.xls'
     worksheet = workbook.add_worksheet("测试报告")
     # 创建一个图表对象,column:柱形图
     chart = workbook.add_chart({'type': 'column'})
@@ -21,7 +19,7 @@ class Write_testReport_excle():
     # ave_formatter.set_border(1)
     # ave_formatter.set_num_format('0.00')
     def __init__(self):
-        self.Ope=OperationExcle()
+        # self.Ope=OperationExcle()
         self.data=GetData()
         # self.workbook=workbook
         # self.worksheet=worksheet
@@ -91,15 +89,15 @@ class Write_testReport_excle():
         formatter.set_border(1)
         formatter.set_font_color('red')
         formatter.set_text_wrap()
-        for i in range(1,rows_count):
-            #将失败的用例写入测试报告中
-            if not self.data.get_result(i)=='pass':
-                # print(self.Ope.get_row_values(i))
-                # print(self.data.get_result(i))
-                worksheet.write_row('A{}'.format(i+8), self.Ope.get_row_values(i),formatter)
-            else:
-                pass
-                # worksheet.write_row('A{}'.format(i+8+rows_count), self.Ope.get_row_values(i),formatter)
+        # for i in range(1,rows_count):
+        #     #将失败的用例写入测试报告中
+        #     if not self.data.get_result(i)=='pass':
+        #         # print(self.Ope.get_row_values(i))
+        #         # print(self.data.get_result(i))
+        #         worksheet.write_row('A{}'.format(i+8), self.Ope.get_row_values(i),formatter)
+        #     else:
+        #         pass
+        #         # worksheet.write_row('A{}'.format(i+8+rows_count), self.Ope.get_row_values(i),formatter)
         workbook.close()
     def excle_to_html(self):
         # 注意这里不能直接使用workbook,因为直接引用workbook返回的对象不是一个文件路径，而是:<class 'xlsxwriter.workbook.Workbook'>

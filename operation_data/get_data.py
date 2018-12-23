@@ -3,11 +3,19 @@ from tool.operation_json import OperationJson
 from operation_data import data_config
 from tool.data_type_change import TypeChange
 import json
-from testCase.test1 import test1
+from tool.Mysql_connect import Mysql_operation
+import os
 
 class GetData:
     def __init__(self):
-        self.opera_excle=OperationExcle()
+        path='../dataCase'
+        for test_list in os.listdir(path):
+            # print(test_list)
+            file_address = path + '/' + test_list
+            sheet_id=0
+            # self.file_address = file_address
+            # self.sheet_id = sheet_id
+            self.opera_excle=OperationExcle(file_address,sheet_id)
     #获取excle行数，就是用例数
     def get_case_line(self):
        return self.opera_excle.get_lines()
@@ -27,12 +35,12 @@ class GetData:
     def is_header(self,row):
         col=int(data_config.get_header())
         header=self.opera_excle.get_cell_value(row,col)
-        if header=='NoToken':
+        if header=='NoToken' or header=='':
             return data_config.get_header_no_token()
         elif header=='appToken':
             return data_config.get_header_value_token()
         else:
-            return None
+            return "header填写错误"
 
     #改变header数据类型，xlsxwriter模块写入数据是需要将数据类型为str
     def get_str_header(self,row):
@@ -87,6 +95,13 @@ class GetData:
         #     return None
         return expect
 
+    #根据sql获取预期结果
+    def get_sql_expect_data(self,row):
+        sql=int(data_config.get_expect(row))
+        My_op=Mysql_operation()
+        sql_except=My_op.sql_select(sql)[0]
+        return sql_except
+
     #写入实际结果
     def write_result(self, row, value):
         col=int(data_config.get_result())
@@ -98,6 +113,8 @@ class GetData:
         col=int(data_config.get_result())
         result=self.opera_excle.get_cell_value(row,col)
         return result
+    
+    
     #获取依赖数据的key
     def get_depent_key(self,row):
         col=int(data_config.get_data_depend())
@@ -123,4 +140,6 @@ class GetData:
         else:
             return data
 
-
+if __name__=='__main__':
+    Gd=GetData()
+    print(Gd.get_case_line())

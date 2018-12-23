@@ -7,15 +7,25 @@ from xlutils.copy import copy  # 导入xlutils模块实现对exlcle的修改
 import os
 
 class OperationExcle:
-    def __init__(self, file_address=None, sheet_id=None):
+    def __init__(self, file_address, sheet_id):
+        # path='../dataCase'
+        # for test_list in os.listdir(path):
+        #     # print(test_list)
+        #     file_address = path + '/' + test_list
+        #     sheet_id=0
+        #     self.file_address = file_address
+        #     self.sheet_id = sheet_id
+        self.file_address=file_address
+        self.sheet_id=sheet_id
+        self.data = self.get_data()
+
+    def get_file_list(self):
         path='../dataCase'
         for test_list in os.listdir(path):
             # print(test_list)
-            self.file_address = file_address
-            self.sheet_id = sheet_id
             file_address = path + '/' + test_list
             sheet_id=0
-        self.data = self.get_data()
+
     # 获取sheets的内容
     def get_data(self):
         data = xlrd.open_workbook(self.file_address)
@@ -73,5 +83,10 @@ class OperationExcle:
 
 
 if __name__ == '__main__':
-    opers = OperationExcle()
-    print(opers.get_cell_value(1, 1))
+    path = '../dataCase'
+    for test_list in os.listdir(path):
+        # print(test_list)
+        file_address = path + '/' + test_list
+        sheet_id = 0
+        opers = OperationExcle(file_address,sheet_id)
+        print(opers.get_cell_value(1, 1))
