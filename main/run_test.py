@@ -1,15 +1,8 @@
-import sys
-sys.path.append('../')
 from base.runmethod import RunMethod
 from operation_data.get_data import GetData
 from tool.common_util import CommonUtil
 from operation_data.dependent import DependentData
 from tool.send_email import SendEmail
-from tool.operation_header import OperationHeader
-from tool.operation_json import OperationJson
-from tool.operation_excle import OperationExcle
-from base import HTMLTestRunner
-import time
 from tool.operation_testReport_excle import Write_testReport_excle
 import os
 
