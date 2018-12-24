@@ -1,9 +1,12 @@
 from tool.operation_excle import OperationExcle
 from operation_data.get_data import GetData
+from operation_data import data_config
 import xlsxwriter
+import time
 import pandas
 import codecs
 import time
+import os
 
 class Write_testReport_excle():
     global workbook,worksheet,chart,formatter,title_formatter,ave_formatter,now,filename
@@ -19,10 +22,13 @@ class Write_testReport_excle():
     # ave_formatter.set_border(1)
     # ave_formatter.set_num_format('0.00')
     def __init__(self):
-        # self.Ope=OperationExcle()
+        path = '../dataCase'
+        for test_list in os.listdir(path):
+            file_address = path + '/' + test_list
+            sheet_id = 0
+            self.Ope=OperationExcle(file_address,sheet_id)
+        # self.Ope = OperationExcle()
         self.data=GetData()
-        # self.workbook=workbook
-        # self.worksheet=worksheet
     def create_TestReport(self):
         worksheet.set_column("A:ZZ",20)
         # bold = workbook.add_format({"bold": True})
@@ -56,7 +62,7 @@ class Write_testReport_excle():
         list1=('B','C','D')
         for row_num in list1:
             chart.add_series({
-            "name":"=测试报告!$B$1",
+            "name":"=测试报告!${}$1:${}$1".format(row_num,row_num),
             "categories":"=测试报告!$A$2:$A$6",
             "values":"=测试报告!${}$2:${}$6".format(row_num,row_num)
             })
@@ -71,7 +77,7 @@ class Write_testReport_excle():
         #设置图表大小
         chart.set_size({'width': 600, 'height': 400})
         # 插入图表带偏移
-        worksheet.insert_chart('G2', chart, {'x_offset': 25, 'y_offset': 10})
+        worksheet.insert_chart('A12', chart, {'x_offset': 25, 'y_offset': 10})
         # 定义标题栏格式对象：边框加粗1像素，背景色为灰色，单元格内容居中、加粗,自动换行
         formatter = workbook.add_format()
         formatter.set_border(1)
@@ -89,15 +95,15 @@ class Write_testReport_excle():
         formatter.set_border(1)
         formatter.set_font_color('red')
         formatter.set_text_wrap()
-        # for i in range(1,rows_count):
-        #     #将失败的用例写入测试报告中
-        #     if not self.data.get_result(i)=='pass':
-        #         # print(self.Ope.get_row_values(i))
-        #         # print(self.data.get_result(i))
-        #         worksheet.write_row('A{}'.format(i+8), self.Ope.get_row_values(i),formatter)
-        #     else:
-        #         pass
-        #         # worksheet.write_row('A{}'.format(i+8+rows_count), self.Ope.get_row_values(i),formatter)
+        for i in range(1,rows_count):
+            #将失败的用例写入测试报告中
+            if not self.data.get_result(i)=='pass':
+                # print(self.Ope.get_row_values(i))
+                # print(self.data.get_result(i))
+                worksheet.write_row('A{}'.format(i+8), self.Ope.get_row_values(i),formatter)
+            else:
+                pass
+                # worksheet.write_row('A{}'.format(i+8+rows_count), self.Ope.get_row_values(i),formatter)
         workbook.close()
     def excle_to_html(self):
         # 注意这里不能直接使用workbook,因为直接引用workbook返回的对象不是一个文件路径，而是:<class 'xlsxwriter.workbook.Workbook'>

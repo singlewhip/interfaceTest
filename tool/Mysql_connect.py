@@ -1,4 +1,3 @@
-#Author:Mr.Qin
 import pymysql
 import json
 
@@ -52,4 +51,3 @@ if __name__=='__main__':
     # print(Mst.sql_update(sql_update))
     # print(Mst.sql_delete(sql_delete))
     Mst.close_db()
-
