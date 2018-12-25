@@ -19,7 +19,7 @@ class Write_testReport_excle():
     # ave_formatter.set_border(1)
     # ave_formatter.set_num_format('0.00')
     def __init__(self):
-        # self.Ope=OperationExcle()
+        self.Ope=OperationExcle()
         self.data=GetData()
         # self.workbook=workbook
         # self.worksheet=worksheet
@@ -89,15 +89,15 @@ class Write_testReport_excle():
         formatter.set_border(1)
         formatter.set_font_color('red')
         formatter.set_text_wrap()
-        # for i in range(1,rows_count):
-        #     #将失败的用例写入测试报告中
-        #     if not self.data.get_result(i)=='pass':
-        #         # print(self.Ope.get_row_values(i))
-        #         # print(self.data.get_result(i))
-        #         worksheet.write_row('A{}'.format(i+8), self.Ope.get_row_values(i),formatter)
-        #     else:
-        #         pass
-        #         # worksheet.write_row('A{}'.format(i+8+rows_count), self.Ope.get_row_values(i),formatter)
+        for i in range(1,rows_count):
+            #将失败的用例写入测试报告中
+            if not self.data.get_result(i)=='pass':
+                # print(self.Ope.get_row_values(i))
+                # print(self.data.get_result(i))
+                worksheet.write_row('A{}'.format(i+8), self.Ope.get_row_values(i),formatter)
+            else:
+                pass
+                # worksheet.write_row('A{}'.format(i+8+rows_count), self.Ope.get_row_values(i),formatter)
         workbook.close()
     def excle_to_html(self):
         # 注意这里不能直接使用workbook,因为直接引用workbook返回的对象不是一个文件路径，而是:<class 'xlsxwriter.workbook.Workbook'>

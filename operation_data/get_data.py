@@ -6,16 +6,18 @@ import json
 from tool.Mysql_connect import Mysql_operation
 import os
 
-class GetData:
+class GetData(OperationExcle):
     def __init__(self):
-        path='../dataCase'
-        for test_list in os.listdir(path):
-            # print(test_list)
-            file_address = path + '/' + test_list
-            sheet_id=0
-            # self.file_address = file_address
-            # self.sheet_id = sheet_id
-            self.opera_excle=OperationExcle(file_address,sheet_id)
+        # path='../dataCase'
+        # for test_list in os.listdir(path):
+        #     # print(test_list)
+        #     file_address = path + '/' + test_list
+        #     sheet_id=0
+        #     # self.file_address = file_address
+        #     # self.sheet_id = sheet_id
+        #     self.opera_excle=OperationExcle(file_address,sheet_id)
+        self.opera_excle=OperationExcle()
+        # print(self.opera_excle)
     #获取excle行数，就是用例数
     def get_case_line(self):
        return self.opera_excle.get_lines()
@@ -28,6 +30,8 @@ class GetData:
         # print(run_model)
         if run_model=='yes':
             flag=True
+        elif run_model=='是否执行':
+            pass
         else:
             flag=False
         return flag
@@ -142,4 +146,6 @@ class GetData:
 
 if __name__=='__main__':
     Gd=GetData()
-    print(Gd.get_case_line())
+    lins=Gd.get_case_line()
+    for a in range(1,lins):
+        print(Gd.get_is_run(a))

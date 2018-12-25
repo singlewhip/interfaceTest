@@ -8,15 +8,21 @@ import os
 
 
 class OperationExcle:
-    def __init__(self, file_address, sheet_id):
-        path = '../dataCase'
-        for test_list in os.listdir(path):
-            # print(test_list)
-            self.file_address = file_address
-            self.sheet_id = sheet_id
-            file_address = path + '/' + test_list
-            sheet_id = 0
-        self.data = self.get_data()
+    def __init__(self, file_address=None, sheet_id=None):
+        if file_address is not None:
+            self.file_address=file_address
+            self.sheet_id=sheet_id
+            self.data = self.get_data()
+        else:
+            path = '../dataCase'
+            for test_list in os.listdir(path):
+                # print(test_list)
+                self.file_address = file_address
+                self.sheet_id = sheet_id
+                file_address = path + '/' + test_list
+                sheet_id = 0
+            self.data = self.get_data()
+            # return self.data
 
     # 获取sheets的内容
     def get_data(self):
