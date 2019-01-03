@@ -7,3 +7,6 @@ base/__pycache__/
 report/
 *.html
 *.pyc
+*.log
+./interfaceTest.sublime-project
+./interfaceTest.sublime-workspace

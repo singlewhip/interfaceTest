@@ -4,11 +4,15 @@ import xlsxwriter
 import pandas
 import codecs
 import time
+import os
 
 class Write_testReport_excle():
     global workbook,worksheet,chart,formatter,title_formatter,ave_formatter,now,filename
     now = time.strftime("%Y-%m-%d %H-%M-%S")
-    workbook=xlsxwriter.Workbook("../report/excle_report/" + now + '_test_report.xls')
+    workbook_path="../report/excle_report/"
+    if not os.path.exists(workbook_path):
+        os.mkdir(workbook_path)
+    workbook=xlsxwriter.Workbook(workbook_path+ now + '_test_report.xls')
     filename='../report/excle_report/' + now + '_test_report.xls'
     worksheet = workbook.add_worksheet("测试报告")
     # 创建一个图表对象,column:柱形图
@@ -103,12 +107,15 @@ class Write_testReport_excle():
         # 注意这里不能直接使用workbook,因为直接引用workbook返回的对象不是一个文件路径，而是:<class 'xlsxwriter.workbook.Workbook'>
         fp=pandas.ExcelFile(filename)
         df=fp.parse()
-        with codecs.open('../report/html_report/'+now+'_test_report.html', 'w', 'utf-8') as html_file:
+        html_report_path='../report/html_report/'
+        if not os.path.exists(html_report_path):
+            os.mkdir(html_report_path)
+        with codecs.open(html_report_path+now+'_test_report.html', 'w', 'utf-8') as html_file:
             html_file.write(df.to_html(header=True, index=False))
 
 
 if __name__=="__main__":
     wte=Write_testReport_excle()
     wte.write_TestReport([1,2,3],[2,3,4,5])
-    # wte.excle_to_html()
+    wte.excle_to_html()
     wte.write_faild_to_excle()
