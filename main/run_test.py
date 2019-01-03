@@ -1,88 +1,107 @@
 from base.runmethod import RunMethod
 from operation_data.get_data import GetData
 from tool.common_util import CommonUtil
-from operation_data.dependent import DependentData
 from tool.send_email import SendEmail
 from tool.operation_testReport_excle import Write_testReport_excle
-import os
+from tool.operation_logging import MyLog  as Log
+
 
 class RunTest:
     def __init__(self):
-        # self.ope=OperationExcle()
-        self.run_method=RunMethod()
-        self.data=GetData()
-        self.com_util=CommonUtil()
-        self.send_mail=SendEmail()
-        self.op_testReport=Write_testReport_excle()
+        global log, logger, resultPath
+        log = Log.get_log()
+        logger = log.get_logger()
+        resultPath = log.get_report_path()
+        self.run_method = RunMethod()
+        self.data = GetData()
+        self.com_util = CommonUtil()
+        self.send_mail = SendEmail()
+        self.op_testReport = Write_testReport_excle()
 
-    #程序执行
+    # 程序执行
     def go_on_run(self):
-        global pass_count,fail_count
-        res=None
-        pass_count=[]
-        fail_count=[]
-        rows_count=self.data.get_case_line()
-        # print(rows_count)
-        for i in range(1,rows_count):
-            is_run=self.data.get_is_run(i)
-            # print(is_run)
-            url=self.data.get_url(i)
-            # print(url)
-            method=self.data.get_request_method(i)
-            request_data=self.data.request_data_type_change(i)
-            # print(request_data)
-            expect=self.data.get_expect_data(i)
-            # print(expect)
-            header=self.data.is_header(i)
-            select_str = 'select'
-            insert_str = 'INSERT'
-            update_str = 'UPDATE'
-            delete_str = 'DELETE'
-            for except_num in select_str, insert_str, update_str, delete_str:
-                except_str = self.com_util.is_contain(except_num,expect)
-                if except_str is True:
-                    expect=self.data.get_sql_expect_data(i)
-                else:
-                    expect=self.data.get_expect_data(i)
-            # print(expect)
-
-            if is_run is True:
-                res=self.run_method.run_main(method,url,request_data,header)
-                if except_str is False:
-                    if self.com_util.is_contain(expect,res)==True:
-                        self.data.write_result(i, 'pass')
-                        print("测试通过")
-                        pass_count.append(i)
-                    else:
-                        self.data.write_result(i,'Filed')
-                        print('测试失败')
-                        fail_count.append(i)
-                # print(res)
-
-
-                if except_str is True:
-                    if self.com_util.is_equal_dict(expect,res)==True:  #判断字典是否相等
-                        self.data.write_result(i, 'pass')
-                        pass_count.append(i)
-                        print('测试通过')
-                    else:
-                        self.data.write_result(i, res)
-                        print('测试失败')
-                        fail_count.append(i)
-
+        global pass_count, fail_count
+        res = None
+        pass_count = []
+        fail_count = []
+        rows_count = self.data.get_case_line()
+        try:
+            # print(rows_count)
+            if rows_count is not None:
+                logger.info("********TEST START********")
             else:
-                pass
-            print(res)
+                logger.info("Have no case to test.")
+            for i in range(1, rows_count):
+                is_run = self.data.get_is_run(i)
+                # print(is_run)
+                url = self.data.get_url(i)
+                # print(url)
+                method = self.data.get_request_method(i)
+                request_data = self.data.request_data_type_change(i)
+                # print(request_data)
+                expect = self.data.get_expect_data(i)
+                # print(expect)
+                header = self.data.is_header(i)
+                select_str = 'select'
+                insert_str = 'INSERT'
+                update_str = 'UPDATE'
+                delete_str = 'DELETE'
+                for except_num in select_str, insert_str, update_str, delete_str:
+                    except_str = self.com_util.is_contain(except_num, expect)
+                    if except_str is True:
+                        expect = self.data.get_sql_expect_data(i)
+                    else:
+                        expect = self.data.get_expect_data(i)
+                # print(expect)
+
+                if is_run is True:
+                    res = self.run_method.run_main(
+                        method, url, request_data, header)
+                    if except_str is False:
+                        if self.com_util.is_contain(expect, res) == True:
+                            self.data.write_result(i, 'pass')
+                            print("测试通过")
+                            pass_count.append(i)
+                            logger.info( '测试通过')
+                        else:
+                            self.data.write_result(i, 'Filed')
+                            print('测试失败')
+                            fail_count.append(i)
+                            logger.info('测试失败')
+                    # print(res)
+
+                    if except_str is True:
+                        if self.com_util.is_equal_dict(expect, res) == True:  # 判断字典是否相等
+                            self.data.write_result(i, 'pass')
+                            pass_count.append(i)
+                            logger.info(pass_count,'测试通过')
+                            print('测试通过')
+                        else:
+                            self.data.write_result(i, res)
+                            logger.info(fail_count, '测试失败')
+                            print('测试失败')
+                            fail_count.append(i)
+                    print(res)
+                    logger.info(res)
+                else:
+                    pass
+
+        except Exception as ex:
+            logger.error(str(ex))
+        finally:
+            logger.info("*********TEST END*********")
                 # print(self.com_util.is_contain(expect,res)==True)
 
-    #发送邮件、生成测试报告
+    # 发送邮件、生成测试报告
     def create_test_report(self):
-        self.op_testReport.write_TestReport(pass_count,fail_count) #生成excel表格测试报告
-        self.op_testReport.excle_to_html() #将测试报告转换为html输出
-        self.send_mail.send_main(pass_count,fail_count) #发送测试报告邮件
+        self.op_testReport.write_TestReport(pass_count, fail_count)  # 生成excel表格测试报告
+        self.op_testReport.excle_to_html()  # 将测试报告转换为html输出
+        self.send_mail.send_main(pass_count, fail_count)  # 发送测试报告邮件
+        logger.info(self.op_testReport.write_TestReport(pass_count,fail_count))
 
-if __name__=='__main__':
-    run=RunTest()
+
+if __name__ == '__main__':
+    run = RunTest()
     run.go_on_run()
     run.create_test_report()
 
