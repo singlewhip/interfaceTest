@@ -60,7 +60,7 @@ class Write_testReport_excle():
         list1=('B','C','D')
         for row_num in list1:
             chart.add_series({
-            "name":"=测试报告!$B$1",
+            "name":"=测试报告!${}$1".format(row_num,row_num),
             "categories":"=测试报告!$A$2:$A$6",
             "values":"=测试报告!${}$2:${}$6".format(row_num,row_num)
             })

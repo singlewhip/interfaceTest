@@ -62,25 +62,30 @@ class RunTest:
                             self.data.write_result(i, 'pass')
                             print("测试通过")
                             pass_count.append(i)
+                            logger.info( '测试通过')
                         else:
                             self.data.write_result(i, 'Filed')
                             print('测试失败')
                             fail_count.append(i)
+                            logger.info('测试失败')
                     # print(res)
 
                     if except_str is True:
                         if self.com_util.is_equal_dict(expect, res) == True:  # 判断字典是否相等
                             self.data.write_result(i, 'pass')
                             pass_count.append(i)
+                            logger.info(pass_count,'测试通过')
                             print('测试通过')
                         else:
                             self.data.write_result(i, res)
+                            logger.info(fail_count, '测试失败')
                             print('测试失败')
                             fail_count.append(i)
-
+                    print(res)
+                    logger.info(res)
                 else:
                     pass
-                    print(res)
+
         except Exception as ex:
             logger.error(str(ex))
         finally:
@@ -92,6 +97,7 @@ class RunTest:
         self.op_testReport.write_TestReport(pass_count, fail_count)  # 生成excel表格测试报告
         self.op_testReport.excle_to_html()  # 将测试报告转换为html输出
         self.send_mail.send_main(pass_count, fail_count)  # 发送测试报告邮件
+        logger.info(self.op_testReport.write_TestReport(pass_count,fail_count))
 
 
 if __name__ == '__main__':
