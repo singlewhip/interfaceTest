@@ -33,6 +33,15 @@
 			}
 		},
 		{
+			"file": "main/run_test.py",
+			"settings":
+			{
+				"buffer_size": 3514,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"contents": "袋鼠打车下单：\n\n{\"allPackages\":\"4\",\"allVolume\":\"2\",\"allWeight\":\"3\",\"businessNo\":\"BSTE11\",\"city\":\"佛山市\",\"cityNo\":\"440600\",\"consigneeAddress\":\"哦哦哦哦哦\",\"consigneeName\":\"阿测试\",\"consigneePhone\":\"18883612485\",\"deliveryAddress\":\"办法\",\"deliveryCity\":\"北京市\",\"deliveryCityNo\":\"110100\",\"deliveryDistrict\":\"东城区\",\"deliveryDistrictNo\":\"110101\",\"deliveryMemo\":\"\",\"isArriva\":\"1\",\"deliveryName\":\"测试\",\"deliveryPhone\":\"18599937985\",\"deliveryProvince\":\"北京\",\"deliveryProvinceNo\":\"110000\",\"district\":\"禅城区\",\"districtNo\":\"440604\",\"floor\":\"\",\"goods\":[],\"isElevator\":\"1\",\"memo\":\"jjledde\",\"orderWay\":\"3\",\"wokerPrice\":12877.51,\"predictServiceDateCode\":\"ch_forenoon\",\"predictServiceDate\":\"2018-12-25\",\"province\":\"广东省\",\"provinceNo\":\"440000\",\"serviceNo\":\"FHB13,FHB14\",\"verfiyType\":\"\",\"verifyOrderNo\":\"  \",\"placeOrderSource\":\"wechat\"}\n\n直营下单： 18599937985\n{\"warehouseId\":\"1d8a79b7-3b10-4643-9b0a-cd5e34992c0a\",\"productParameterList\":[{\"productId\":\"2\",\"num\":1,\"roomArea\":\"1\",\"packNum\":22,\"installFee\":\"1\",\"memo\":\"11\",\"middleClassNo\":\"FHB01005\",\"bigClassNo\":\"FHB01\"}],\"storageType\":\"CARGOSOURCETYPE02\",\"cargoOwnerId\":\"1\",\"serviceList\":[\"ZpsServiceType01\"],\"consigneName\":\"测试\",\"consignePhone\":\"18883612485\",\"floor\":\"2\",\"consigneMemo\":\"32\",\"consigneAddress\":\"23\",\"outNo\":\"\",\"outSourceWarehouse\":\"\",\"memo\":\"323\",\"productType\":1,\"elevator\":0,\"costList\":[{\"costName\":\"配送费\",\"code\":\"f-03\",\"serviceNo\":\"ZpsServiceType01\",\"money\":\"2\",\"clearingObject\":\"1\"}],\"chServiceCollectionCostList\":[{\"costNo\":\"CHCOLLECTIONFEE03\",\"money\":\"0.01\"},{\"costNo\":\"CHCOLLECTIONFEE01\",\"money\":\"0.01\"}],\"appointTime\":\"\",\"appointTimePart\":\"\",\"verifityNoList\":[],\"verifitySource\":\"\",\"isStorage\":1,\"allVolume\":\"1\",\"businessNo\":\"BSTE02\",\"cargoPrice\":\"2\",\"pickOrderMoney\":\"2\",\"allWeight\":\"1\",\"orderSourceNo\":\"32\",\"consigneProvinceNo\":\"130000\",\"consigneCityNo\":\"130200\",\"consigneDistrictNo\":\"130203\"}\n\n直营下单：15023621999\n\n{\"warehouseId\":\"00536203-c242-4145-8f1e-e8a6f0a7ec11\",\"productParameterList\":[{\"productId\":\"eeee27a0-fadf-49d7-b32a-b6f46fa1c6cf\",\"num\":1,\"roomArea\":\"1\",\"packNum\":4,\"installFee\":\"1\",\"memo\":\"1\",\"middleClassNo\":\"FHB01005\",\"bigClassNo\":\"FHB01\"}],\"storageType\":\"CARGOSOURCETYPE02\",\"cargoOwnerId\":\"0c6fa561-ffb3-438f-8758-1c09b662fe05\",\"serviceList\":[\"ZpsServiceType01\",\"ZpsServiceType02\"],\"consigneName\":\"测试\",\"consignePhone\":\"18883612485\",\"floor\":\"22\",\"consigneMemo\":\"4324\",\"consigneAddress\":\"432432\",\"outNo\":\"\",\"outSourceWarehouse\":\"\",\"memo\":\"3\",\"productType\":1,\"elevator\":0,\"costList\":[{\"costName\":\"配送费\",\"code\":\"f-03\",\"serviceNo\":\"ZpsServiceType01\",\"money\":\"2\",\"clearingObject\":\"0c6fa561-ffb3-438f-8758-1c09b662fe05\"},{\"costName\":\"安装费\",\"code\":\"f-04\",\"serviceNo\":\"ZpsServiceType02\",\"money\":\"2\",\"clearingObject\":\"0c6fa561-ffb3-438f-8758-1c09b662fe05\"}],\"chServiceCollectionCostList\":[{\"costNo\":\"CHCOLLECTIONFEE03\",\"money\":\"0.01\",\"memo\":\"2\"},{\"costNo\":\"CHCOLLECTIONFEE01\",\"money\":\"0.01\",\"memo\":\"32\"}],\"appointTime\":\"\",\"appointTimePart\":\"\",\"verifityNoList\":[],\"verifitySource\":\"\",\"isStorage\":1,\"allVolume\":\"2\",\"businessNo\":\"BSTE02\",\"cargoPrice\":\"3\",\"pickOrderMoney\":\"2\",\"allWeight\":\"2\",\"orderSourceNo\":\"2\",\"consigneProvinceNo\":\"500000\",\"consigneCityNo\":\"500100\",\"consigneDistrictNo\":\"500101\"}",
 			"settings":
 			{
@@ -117,8 +126,25 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/E/Interfacetest_diy"
+	],
 	"file_history":
 	[
+		"/E/Interfacetest_diy/tool/data_type_change.py",
+		"/E/Interfacetest_diy/tool/operation_testReport_excle.py",
+		"/E/Interfacetest_diy/tool/send_email.py",
+		"/E/Interfacetest_diy/tool/operation_logging.py",
+		"/E/Interfacetest_diy/tool/operation_json.py",
+		"/E/Interfacetest_diy/tool/operation_header.py",
+		"/E/Interfacetest_diy/tool/operation_excle.py",
+		"/E/Interfacetest_diy/tool/Mysql_connect.py",
+		"/E/Interfacetest_diy/tool/common_util.py",
+		"/E/Interfacetest_diy/base/runmethod.py",
+		"/E/Interfacetest_diy/operation_data/data_config.py",
+		"/E/Interfacetest_diy/operation_data/dependent.py",
+		"/E/Interfacetest_diy/operation_data/get_data.py",
 		"/E/Interfacetest_diy/main/run_test.py",
 		"/C/Users/24831/Desktop/TXT/测试内容及问题/货鼠岱嘀小程序12.17.txt",
 		"/E/Interfacetest_diy/interfaceTest/interfaceTest.sublime-project",
@@ -406,11 +432,53 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
+					"file": "main/run_test.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3514,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2771,
+								2771
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": ".",
+									"selector": "source.python - string - comment - constant.numeric"
+								},
+								{
+									"characters": ".",
+									"selector": "source.python - string - constant.numeric"
+								}
+							],
+							"spell_check": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1260.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
 					"semi_transient": false,
 					"settings":
 					{
@@ -590,7 +658,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]

@@ -1,4 +1,6 @@
-from common_util import CommonUtil
+import sys
+sys.path.append('../')
+from tool.common_util import CommonUtil
 
 class TypeChange:
     def __init__(self):
