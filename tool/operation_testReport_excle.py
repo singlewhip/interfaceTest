@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../')
 from tool.operation_excle import OperationExcle
 from operation_data.get_data import GetData
 import xlsxwriter

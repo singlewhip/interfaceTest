@@ -1,4 +1,4 @@
-from tool.common_util import CommonUtil
+from common_util import CommonUtil
 
 class TypeChange:
     def __init__(self):

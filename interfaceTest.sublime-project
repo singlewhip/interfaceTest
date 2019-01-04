@@ -5,18 +5,17 @@
 			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
 			"name": "Anaconda Python Builder",
 			"selector": "source.python",
-			"shell_cmd": "\"C:/Users/24831/AppData/Local/Programs/Python/Python36/python.exe\" -u \"$file\""
+			"shell_cmd": "\"python\" -u \"$file\""
 		}
 	],
 	"folders":
 	[
 		{
-			"path": "E:\\Interfacetest_diy\\interfaceTest"
+			"path": "."
 		}
-	]
-	 ,
-    "setting":
-    {
-        "python_interpreter":"C:/Users/24831/AppData/Local/Programs/Python/Python36/python.exe"
-    }
+	],
+	"setting":
+	{
+		"python_interpreter": "C:/Users/24831/AppData/Local/Programs/Python/Python36/python.exe"
+	}
 }

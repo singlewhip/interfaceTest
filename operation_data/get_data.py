@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../')
 from tool.operation_excle import OperationExcle
 from tool.operation_json import OperationJson
 from operation_data import data_config

@@ -1,7 +1,7 @@
 import sys
 import json
 import os
-sys.path.append("../../interfacetest_diy")
+sys.path.append("../")
 from tool.operation_excle import OperationExcle
 from tool.operation_json import OperationJson
 from base.runmethod import RunMethod
