@@ -7,7 +7,7 @@ from xlutils.copy import copy  # 导入xlutils模块实现对exlcle的修改
 import os
 
 
-class OperationExcle:
+class OperationExcle():
     def __init__(self, file_address=None, sheet_id=None):
         if file_address is not None:
             self.file_address=file_address

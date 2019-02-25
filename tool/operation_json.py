@@ -4,7 +4,7 @@ class OperationJson:
     #初始化文件
     def __init__(self,file_path=None):
         if file_path==None:
-             self.file_path='../dataconfig/test.json'
+             self.file_path='../config/test.json'
         else:
              self.file_path=file_path
         self.data=self.read_data()
@@ -23,7 +23,7 @@ class OperationJson:
             return print('id不存在，请检查id是否填写正确')
         #写入json
     def write_data(self,data):
-        with open('../dataconfig/test.json','w') as fp:
+        with open('../config/test.json','w') as fp:
             fp.write(json.dumps(data))
 
 if __name__ == '__main__':

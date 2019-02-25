@@ -8,7 +8,7 @@ import json
 from tool.Mysql_connect import Mysql_operation
 import os
 
-class GetData(OperationExcle):
+class GetData():
     def __init__(self):
         # path='../dataCase'
         # for test_list in os.listdir(path):
@@ -19,7 +19,6 @@ class GetData(OperationExcle):
         #     # self.sheet_id = sheet_id
         #     self.opera_excle=OperationExcle(file_address,sheet_id)
         self.opera_excle=OperationExcle()
-        # print(self.opera_excle)
     #获取excle行数，就是用例数
     def get_case_line(self):
        return self.opera_excle.get_lines()

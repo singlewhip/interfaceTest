@@ -42,9 +42,9 @@ class DependentData:
         #math.value返回的是一个list，可以使用索引访问特定的值jsonpath_rw的作用就相当于从json里面提取响应的字段值
         return [math.value for math in madle][0]
 if __name__=='__main__':
-    order = {"data":{"ser":"666","bn":"erre"}}
+    order = {"data":{"ser":"666","bn":"erre","num":['1','2','3']}}
     #可以定义多个对象data.(_input_charset,subject),
-    res = "data.(ser)"
+    res = "data.(num)[:1]"
     json_exe = parse(res)
     madle = json_exe.find(order)
     print([math.value for math in madle][::])

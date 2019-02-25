@@ -8,11 +8,10 @@ from operation_data.dependent import DependentData
 from tool.send_email import SendEmail
 from tool.operation_testReport_excle import Write_testReport_excle
 import os
-
+from config.congfigInfo import Config_Try_Num
 
 class RunTest:
     def __init__(self):
-        # self.ope=OperationExcle()
         self.run_method = RunMethod()
         self.data = GetData()
         self.com_util = CommonUtil()
@@ -49,35 +48,50 @@ class RunTest:
                 else:
                     expect = self.data.get_expect_data(i)
             # print(expect)
-
+            errorNum=0
             if is_run is True:
-                res = self.run_method.run_main(
-                    method, url, request_data, header)
-                if except_str is False:
-                    if self.com_util.is_contain(expect, res) == True:
-                        self.data.write_result(i, 'pass')
-                        print("测试通过")
-                        pass_count.append(i)
-                    else:
-                        self.data.write_result(i, 'Filed')
-                        print('测试失败')
-                        fail_count.append(i)
-                # print(res)
+                while errorNum <= Config_Try_Num:  # 判段失败次数是否小于等于配置失败重试次数
+                    res = self.run_method.run_main(method, url, request_data, header)
+                    if except_str is False:
+                        if self.com_util.is_contain(expect, res) == True:
+                            self.data.write_result(i, 'pass')
+                            print("测试通过")
+                            pass_count.append(i)
+                            errorNum=0
+                            break
+                        else:
+                            self.data.write_result(i, 'Filed')
+                            # print('测试失败,重试中')
 
-                if except_str is True:
-                    if self.com_util.is_equal_dict(expect, res) == True:  # 判断字典是否相等
-                        self.data.write_result(i, 'pass')
-                        pass_count.append(i)
-                        print('测试通过')
-                    else:
-                        self.data.write_result(i, res)
-                        print('测试失败')
-                        fail_count.append(i)
+                            if errorNum<Config_Try_Num:
+                                errorNum += 1
+                                print("测试失败，重试中,当前重试次数为第%s次"%(errorNum))
+                            else:
+                                print("重试次数已用完,测试失败")
+                                fail_count.append(i)
+                                break
+                    # print(res)
 
-            else:
-                pass
-            print(res)
-            # print(self.com_util.is_contain(expect,res)==True)
+                    if except_str is True:
+                        if self.com_util.is_equal_dict(expect, res) == True:  # 判断字典是否相等
+                            self.data.write_result(i, 'pass')
+                            pass_count.append(i)
+                            print('测试通过')
+                        else:
+                            self.data.write_result(i, 'Filed')
+                            # print('测试失败,重试中')
+                            if errorNum < Config_Try_Num:
+                                errorNum += 1
+                                print("测试失败，重试中,当前重试次数为第%s次" % (errorNum))
+                            else:
+                                print("重试次数已用完,测试失败")
+                                fail_count.append(i)
+                                break
+
+                else:
+                    pass
+                print(res)
+                # print(self.com_util.is_contain(expect,res)==True)
 
     # 发送邮件、生成测试报告
     def create_test_report(self):
